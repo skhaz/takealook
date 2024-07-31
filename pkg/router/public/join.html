@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Take A Look</title>
+    <style>
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.15;
+        -webkit-text-size-adjust: 100%;
+        tab-size: 4;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        align-items: flex-end;
+      }
+
+      label,
+      input {
+        width: 100%;
+      }
+
+      button {
+        align-self: flex-end;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form id="form" action="/join" method="POST">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required minlength="6" maxlength="32" />
+
+      <button type="submit">Join</button>
+    </form>
+
+    <script>
+      {{ if .Error }} alert("{{ .Message }}"){{ end }}
+    </script>
+  </body>
+</html>

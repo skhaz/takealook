@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Take A Look</title>
+    <style>
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.15;
+        -webkit-text-size-adjust: 100%;
+        -moz-tab-size: 4;
+        tab-size: 4;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: none;
+        padding: 8px;
+      }
+
+      thead th {
+        width: 25%;
+      }
+
+      thead {
+        background-color: #333;
+        color: white;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 2%;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #fff;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #eee;
+      }
+
+      caption {
+        font-weight: bold;
+        font-size: 24px;
+        text-align: left;
+        color: #333;
+        margin-bottom: 16px;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .central {
+        text-align: center;
+        position: relative;
+        width: 100%;
+      }
+
+      .space {
+        height: 16px;
+      }
+
+      .submit-link {
+        position: absolute;
+        right: 0;
+        top: -40px;
+        text-decoration: none;
+        color: blue;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="central">
+        <a href="/submit" class="submit-link">Submit [+]</a>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Count</th>
+              <th>Short</th>
+              <th>URL</th>
+              <th>Error</th>
+              <th>Ready</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{range .Data}}
+            <tr>
+              <td>{{.Count}}</td>
+              <td>
+                <a href="{{.Short}}" onclick="copyLink(event)">{{.Short}}</a>
+              </td>
+              <td><a href="{{.URL}}">{{.URL}}</a></td>
+              <td>{{if .Error}}true{{else}}false{{end}}</td>
+              <td>{{if .Ready}}true{{else}}false{{end}}</td>
+            </tr>
+            {{end}}
+          </tbody>
+        </table>
+
+        <div class="space"></div>
+
+        <span
+          >feedback, suggestions, bugs, or issues:
+          <a href="mailto:hello@ultratech.software"
+            >hello@ultratech.software</a
+          ></span
+        >
+      </div>
+    </div>
+    <script>
+      function copyLink(event) {
+        event.preventDefault();
+        const link = event.target.href;
+
+        const tempInput = document.createElement("input");
+        tempInput.style.position = "absolute";
+        tempInput.style.left = "-9999px";
+        tempInput.value = link;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+
+        alert("Link copied: " + link);
+      }
+    </script>
+  </body>
+</html>

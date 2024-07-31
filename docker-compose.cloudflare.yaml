@@ -1,0 +1,7 @@
+services:
+  tunnel:
+    image: cloudflare/cloudflared
+    restart: always
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=eyJhIjoiMDhiZGFkMDFiNWY1MjZhZmI4NDRmMGE4ZWYyNGMzMzYiLCJ0IjoiZDlkMDM3NzItYjA4OS00ODlkLTgyOTgtZDUyZTAzZDdlOGZiIiwicyI6IllUSmxZbVUwTTJNdFkyTmpaQzAwT0dSbExXRTBZalV0TXpNM1l6TTNNRGN3WlRoaCJ9

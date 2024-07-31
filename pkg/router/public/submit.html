@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="dns-prefetch" href="{{ .CDN }}" />
+    <link rel="preconnect" href="{{ .CDN }}" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Take A Look</title>
+    <style>
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.15;
+        -webkit-text-size-adjust: 100%;
+        tab-size: 4;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      form {
+        display: flex;
+        gap: 0.5em;
+        justify-content: center;
+        align-items: center;
+      }
+
+      label {
+        display: none;
+      }
+
+      input {
+        width: 300px;
+      }
+
+      button {
+        align-self: flex-end;
+      }
+
+      .preview {
+        margin-top: 1em;
+        text-align: center;
+        max-width: 60%;
+        width: 100%;
+      }
+
+      .preview img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      .preview .title {
+        font-weight: bold;
+        text-align: left;
+        margin-top: 0.5em;
+      }
+
+      .preview .description {
+        text-align: left;
+      }
+
+      .preview .short {
+        text-align: center;
+      }
+
+      .preview .space {
+        height: 0.5em;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 100%;
+        max-width: 600px;
+        padding: 1em;
+      }
+
+      .dashboard-link {
+        text-decoration: none;
+        color: blue;
+        font-size: 1rem;
+        align-self: flex-end;
+        margin-bottom: 0.5em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <a href="/dashboard" class="dashboard-link">Dashboard</a>
+      <form id="form">
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url" required aria-label="URL" />
+        <button type="submit" aria-label="Submit URL">Submit</button>
+      </form>
+    </div>
+
+    <div class="preview">
+      <img
+        id="preview"
+        alt="Preview Image"
+        width="600"
+        height="315"
+        src="data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAA78AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAABLAAAAJ2AAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQUMAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAA8dtZGF0EgAKChlqZXzrwQICBoQyrgcRkAGGGGFA9LrNz/CPXosxZZwKgbt7d9H42LhL4qZIeBahtYDw60v2/BkFNB3NsxzKW+1TH2sq6BgPn3lLXkilCNnD0tD7TN95qgWxsYJeCJHqLtGBfzT7JzZvaTuWBgYveBANRQBV6z0IBbNNXri55iOsYU06+SCA3oYjIqrgUY00iooR8NW6XNfXVfQl5DAJQxIfO8dU6z6J3xsWdspxHuuCs491Vy35+E8OufDAUFEsymqmjuv/Vm+n5bDCnGDVSTc/HX0+GTBb4ynQPNlbqFZMSduTxv/DSu8VxlhnuaRlUSLtE1R/CUoL6k/mOFxWVvZF4W9y53F2tuqsCi9VTLUPmac+uPeSRle2C0LC8aRofJo8zgbnbqHz0oMLjrhNdisjD5s0Ok90S4YIJgnJ03xwcxHqOafXVVplNgI1jWo36zQ0X/pN3g3SPLILtO30V9L4QG3Wg2/qb02lG6S8jPERQjjX8IwQ0tmc8H1DCAtiOdgfPnaXDCRhYh/qPogmON5p+fWcM3J+LJ8F6Prtg92iMjmLlKMG6InV2wC6Pt2cNItIKXPh71gpqlBqt0cAZEexNxOaopmD1u1QlMGgLMgylAx8xh0m2/8TwQx4xEx80V9ZLNDFpG3eqm2avWTUaLjAYlK0LzFQdkiXYqt5+0KK5b2icwJ2bQn8bgadDnKOc2+DQOZiZWna2I+rklHfIjPmcL5pkiI2VwNZQoVfdvXyQlZi3CvZUwQEh5zAPZ8sJFuyOpKX4ouHNchQlV5V47/Atlbm/+mCzTOix16+xyliwjCbkzHv51ebZLXQUSqMP1JwakHsDBh1v52vcyneN4P1asY/epeSNWBkPYfk+pSIC+cgAdqbQla6Ic33C+fJrvUR7luMRxKx5jwFedJD3Gel16X9G0DI+WVYzcXoWB8AAkbjZDkR6wz5GW9pI3ybSNZxwlzUoy/UZCeF6BrFznm/At2w9ZY2e4X8QLqEPKWfFT4aVbHng/ujexxXsr2i6/adMIDMQYtMxg6QOHV/k8vWl6Bg+YI1Y4rjzj+nz8qBJJqI4k8yIOrcy7FdgbrS/MXrNQF176BKIREzcgtObhb5Uu9fC/IYBcyCcZWQRZ+zihqdUzWRayup+Zbeg9teQIpd3Bw8d5KpFQPYwswuySots6jhzO87q0GZ3U9mRvrx8OFFHUUD8hBTLDlerzV+Mwa6tdCbxAzIFKwqP8RrFAPtvr8fyKDKxgC6it+rDs/GNs0IFPHEv3EDBII="
+      />
+      <div id="title" class="title">Title</div>
+      <div id="description" class="description">Description</div>
+      <div class="space"></div>
+      <div id="short" class="short"></div>
+    </div>
+
+    <script>
+      document
+        .getElementById("form")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const url = document.getElementById("url").value;
+
+          const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ url }),
+          };
+
+          let attempts = 120;
+
+          while (attempts > 0) {
+            try {
+              const response = await fetch("/submit", options);
+              switch (response.status) {
+                case 201:
+                  const { preview, title, description, url } =
+                    await response.json();
+
+                  document.getElementById("preview").src = preview;
+                  document.getElementById("title").innerHTML = title;
+                  document.getElementById("description").innerHTML =
+                    description;
+                  document.getElementById("short").innerHTML =
+                    `<a href=${url} onclick="copyLink(event)">${url}</a>`;
+                  return;
+
+                case 400:
+                  const error = await response.json();
+                  alert(error.error);
+                  return;
+
+                case 402:
+                  window.location = "/pay";
+
+                default:
+                  break;
+              }
+
+              attempts--;
+
+              await new Promise((resolve) => setTimeout(resolve, 1000));
+            } catch (error) {
+              console.error(error);
+            }
+          }
+
+          if (attempts === 0) {
+            console.log("Max attempts reached. Please try again later.");
+          }
+        });
+
+      function copyLink(event) {
+        event.preventDefault();
+        const link = event.target.href;
+
+        const tempInput = document.createElement("input");
+        tempInput.style.position = "absolute";
+        tempInput.style.left = "-9999px";
+        tempInput.value = link;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+
+        alert("Link copied: " + link);
+      }
+    </script>
+  </body>
+</html>

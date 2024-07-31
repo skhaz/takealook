@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes:
+      - data:/data
+    tmpfs:
+      - /tmp
+volumes:
+  data:

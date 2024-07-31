@@ -1,0 +1,44 @@
+#cloud-config
+---
+bootcmd:
+  - ufw enable
+  - ufw default deny incoming
+  - ufw default allow outgoing
+
+runcmd:
+  # - ufw allow 80/tcp
+  # - ufw allow 443/tcp
+  - ufw allow 22/tcp
+
+users:
+  - name: ${user}
+    shell: /usr/bin/bash
+    ssh_import_id: gh:${user}
+    sudo: ALL=(ALL:ALL) NOPASSWD:ALL
+    groups: docker
+    lock_passwd: true
+
+chpasswd:
+  expire: false
+
+ssh_pwauth: false
+
+apt_update: true
+
+apt_upgrade: true
+
+apt:
+  sources:
+    docker.list:
+      source: deb https://download.docker.com/linux/debian bookworm stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+packages:
+  - git
+  - docker-ce
+  - docker-ce-cli
+  - docker-compose-plugin
+# runcmd:
+#   - |
+#     wget -NP . https://dokku.com/install/v0.34.4/bootstrap.sh
+#     DOKKU_TAG=v0.34.4 bash bootstrap.sh

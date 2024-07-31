@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="{{ .Description }}" />
+
+    <title>{{ .Title }}</title>
+
+    <meta property="og:title" content="{{ .Title }}" />
+    <meta property="og:description" content="{{ .Description }}" />
+    <meta property="og:image" content="{{ .Image }}" />
+    <meta property="og:url" content="{{ .Canonical }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ .Title }}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ .Title }}" />
+    <meta name="twitter:description" content="{{ .Description }}" />
+    <meta name="twitter:image" content="{{ .Image }}" />
+
+    <meta name="robots" content="index, follow" />
+  </head>
+  <body>
+    <a href="{{ .URL }}">{{ .URL }}</a>
+  </body>
+  <script>
+    window.location = "{{ .URL }}";
+  </script>
+</html>
