@@ -40,7 +40,7 @@ func (r *Router) Redirect(c echo.Context) error {
 		}
 
 		var message = fmt.Sprintf("database query failed for '%s'", short)
-		log.Error(message, zap.Error(err))
+		log.Warn(message, zap.Error(err))
 		return c.JSON(http.StatusInternalServerError, echo.Map{"error": message})
 	}
 
